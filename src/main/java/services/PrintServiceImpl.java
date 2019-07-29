@@ -16,8 +16,11 @@ import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class PrintServiceImpl implements PrintService {
+    private static Logger log = Logger.getLogger(PrintDAOImpl.class.getName());
 
     private PrintDAO printDAO;
 
@@ -25,15 +28,18 @@ public class PrintServiceImpl implements PrintService {
         this.printDAO = new PrintDAOImpl();
     }
 
+    @Override
     public Print findPrintById(Long id) {
         return printDAO.getPrintById(id);
     }
 
+    @Override
     public Print findPrintByName(String name) {
         return printDAO.getPrintByName(name);
     }
 
-    public Collection<Print> findAllPrints() {
+    @Override
+    public List<Print> findAllPrints() {
         return printDAO.getAllPrints();
     }
 
@@ -51,7 +57,7 @@ public class PrintServiceImpl implements PrintService {
         return true;
     }
 
-    public Collection<Print> readPrintsFromXML(Collection<Print> prints, String xmlPath) {
+    public List<Print> readPrintsFromXML(List<Print> prints, String xmlPath) {
 
         if(validateXMLSchema("Prints.xsd", xmlPath)) {
             try {
@@ -69,10 +75,12 @@ public class PrintServiceImpl implements PrintService {
         return null;
     }
 
+    @Override
     public boolean exportFromPrintsToXML(String xmlPath) {
         return false;
     }
 
+    @Override
     public boolean importToPrintsFromXML(String xmlPath) {
         boolean result = false;
         if(validateXMLSchema("Prints.xsd", xmlPath)) {
@@ -91,14 +99,17 @@ public class PrintServiceImpl implements PrintService {
         return result;
     }
 
+    @Override
     public void addPrint(Print print) {
         printDAO.addPrint(print);
     }
 
+    @Override
     public void updatePrint(Print print) {
         printDAO.updatePrint(print);
     }
 
+    @Override
     public void deletePrint(Print print) {
         printDAO.deletePrint(print);
     }

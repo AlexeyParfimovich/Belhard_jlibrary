@@ -7,11 +7,11 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
+import java.util.List;
 
 public class PrintXMLHandler extends DefaultHandler {
 
-    private Collection prints;
+    private List<Print> prints;
     private Print print;
 
     private boolean isID = false;
@@ -24,7 +24,7 @@ public class PrintXMLHandler extends DefaultHandler {
     private boolean isBookgenre = false;
     private boolean isPeriodicalgenre = false;
 
-    PrintXMLHandler(Collection prints) throws SAXException{
+    PrintXMLHandler(List prints) throws SAXException{
         if(prints == null) {
             throw new SAXException("Collection is not defined");
         }

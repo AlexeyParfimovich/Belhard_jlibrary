@@ -1,7 +1,7 @@
 package services;
 
 import entities.Print;
-import java.util.Collection;
+import java.util.List;
 
 public interface PrintService {
 
@@ -9,7 +9,7 @@ public interface PrintService {
 
     Print findPrintByName (String name);
 
-    Collection<Print> findAllPrints ();
+    List<Print> findAllPrints ();
 
     boolean importToPrintsFromXML (String fileName);
     boolean exportFromPrintsToXML (String fileName);

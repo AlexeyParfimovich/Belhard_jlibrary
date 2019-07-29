@@ -2,7 +2,7 @@ package dao;
 
 import entities.Print;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface PrintDAO {
 
@@ -10,7 +10,7 @@ public interface PrintDAO {
 
     Print getPrintByName (String name);
 
-    Collection<Print> getAllPrints ();
+    List<Print> getAllPrints ();
 
     Long addPrint (Print print);        // return prints id
     Print updatePrint (Print print);    // return updated print

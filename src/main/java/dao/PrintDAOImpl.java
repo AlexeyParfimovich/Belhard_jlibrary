@@ -2,10 +2,7 @@ package dao;
 
 import entities.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,36 +25,25 @@ public class PrintDAOImpl implements PrintDAO {
 ////        try {
 ////            log.info("Checking DB access:");
 ////
-////            Class.forName(dbDriver);
-////            log.info(dbDriver + " loaded successfully");
-////
 ////            connection = DriverManager.getConnection(dbURL+IfExists, dbLogin, dbPass);
 ////            log.info("Сonnection established to " + dbURL);
 ////
 ////            connection.close();
-////
-////        } catch (ClassNotFoundException ex) {
-////            log.log(Level.SEVERE,"DB driver not found:", ex);
 ////
 ////        } catch (SQLException ex) {
 ////
 ////            log.log(Level.WARNING,"Connecton not established:", ex);
 ////
 ////            try {
-////
 ////                connection = DriverManager.getConnection(dbURL, dbLogin, dbPass);
 ////                createDefaultDB(connection);
 ////                log.info("Default DB created, connection established to " + dbURL);
-////
 ////                connection.close()
-////
 ////            } catch (SQLException exx) {
 ////                log.log(Level.SEVERE,"Default DB wasn't created:", exx);
 ////
 ////            } finally {
-////
 ////                if (connection != null) connection.close();
-////
 ////            }
 ////        }
 //    }
@@ -206,7 +192,78 @@ public class PrintDAOImpl implements PrintDAO {
 
     @Override
     public List<Print> getAllPrints() {
-        List<Print> prints = new ArrayList<>();
+        List<Print> prints = null;
+
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection(dbURL+IfExists, dbLogin, dbPass);
+            //log.info("Сonnection established to " + dbURL);
+
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT prints.id, prints.type_id, \n" +
+                           "books.isbn, books.title, books.writer, books.publication_date, book_genres.genre, \n" +
+                           "periodicals.issn, periodicals.title, periodicals.publication_date, periodicals_formats.format, periodicals_genres.genre \n" +
+                           "FROM prints \n" +
+                           "LEFT JOIN books ON prints.type_id = 1 AND prints.descr_id = books.id \n" +
+                           "LEFT JOIN book_genres ON books.genre_id = book_genres.id \n" +
+                           "LEFT JOIN periodicals ON prints.type_id = 2 AND prints.descr_id = periodicals.id \n" +
+                           "LEFT JOIN periodicals_genres ON periodicals.genre_id = periodicals_genres.id \n" +
+                           "LEFT JOIN periodicals_formats ON periodicals.format_id = periodicals_formats.id";
+            ResultSet resultSet = statement.executeQuery(query);
+
+//            while (resultSet.next()) {
+//                System.out.println(resultSet.getString(1) + " ; " +
+//                                resultSet.getString(2) + " ; " +
+//                                resultSet.getString(3) + " ; " +
+//                                resultSet.getString(4) + " ; " +
+//                                resultSet.getString(5) + " ; " +
+//                                resultSet.getString(6) + " ; " +
+//                                resultSet.getString(7) + " ; " +
+//                                resultSet.getString(8) + " ; " +
+//                                resultSet.getString(9) + " ; " +
+//                                resultSet.getString(10) + " ; " +
+//                                resultSet.getString(11) + " ; " +
+//                                resultSet.getString(12));
+//            }
+
+            prints = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Print print = null;
+                switch(resultSet.getInt(2)){
+                    case 1:
+                        print = new Book();
+                        print.setId(resultSet.getLong(1));
+                        ((Book) print).setIsbn(resultSet.getString(3));
+                        print.setTitle(resultSet.getString(4));
+                        ((Book) print).setWriter(resultSet.getString(5));
+                        print.setDate(resultSet.getDate(6));
+                        ((Book) print).setGenre(BookGenre.valueOf(resultSet.getString(7)));
+                        break;
+                    case 2:
+                        print = new Periodical();
+                        print.setId(resultSet.getLong(1));
+                        ((Periodical) print).setIssn(resultSet.getString(8));
+                        print.setTitle(resultSet.getString(9));
+                        print.setDate(resultSet.getDate(10));
+                        ((Periodical) print).setFormat(PeriodicalFormat.valueOf(resultSet.getString(11)));
+                        ((Periodical) print).setGenre(PeriodicalGenre.valueOf(resultSet.getString(12)));
+                        break;
+                }
+
+                if(print != null) prints.add(print);
+            }
+
+            query = "SHUTDOWN";
+            statement.execute(query);
+
+            connection.close();
+
+        } catch (SQLException ex) {
+              log.log(Level.WARNING, "Connection not established:", ex);
+          }
 
         return prints;
     }

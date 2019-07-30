@@ -64,11 +64,9 @@ public abstract class Print {
 
     @Override
     public String toString() {
-        return "Print{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", type=" + type +
-                ", date=" + date + '}';
+        return "N_" + id +
+               ", '" + date + '\'' +
+               ", '" + title + '\'';
     }
 
     public Long getId() {

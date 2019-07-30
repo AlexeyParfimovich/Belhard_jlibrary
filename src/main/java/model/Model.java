@@ -28,13 +28,13 @@ public class Model {
 
     public void add(Print print) {
 
-        prints.add(print);
+        //prints.add(print);
         //service.addPrint(print);
     }
 
     public List<String> list() {
 
-        //prints = service.findAllPrints();
+        prints = service.findAllPrints();
 
         return prints.stream()
                 .map(Print::toString)

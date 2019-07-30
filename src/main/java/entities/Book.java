@@ -43,12 +43,12 @@ public class Book extends Print {
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "Book { " +
                 super.toString() +
-                "isbn='" + isbn + '\'' +
-                ", writer='" + writer + '\'' +
-                ", genre=" + genre +
-                "}";
+                ", '" + writer + '\'' +
+                ", '" + isbn + '\'' +
+                ", " + genre +
+                " }";
     }
 
     public String getIsbn() { return isbn; }

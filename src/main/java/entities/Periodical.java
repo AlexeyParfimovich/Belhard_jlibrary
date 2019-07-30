@@ -43,11 +43,12 @@ public class Periodical extends Print{
 
     @Override
     public String toString() {
-        return "Periodical{" +
-                "issn='" + issn + '\'' +
-                ", format=" + format +
-                ", genre=" + genre +
-                "} " + super.toString();
+        return "Periodical { " +
+                super.toString() +
+                ", '" + issn + '\'' +
+                ", " + genre +
+                " " + format +
+                " }";
     }
 
     public String getIssn() {

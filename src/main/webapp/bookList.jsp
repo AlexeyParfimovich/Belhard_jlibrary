@@ -11,7 +11,7 @@
             <h1>Books service app</h1>
         </div>
 
-        <div class="w3-container w3-center w3-margin-bottom w3-padding">
+        <div class="w3-container w3-margin-bottom w3-padding">
             <div class="w3-card-4">
                 <div class="w3-container w3-light-blue">
                     <h2>Books</h2>
@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div class="w3-container w3-grey w3-opacity w3-right-align w3-padding">
+        <div>
             <button class="w3-btn w3-round-large" onclick="location.href='/jlibrary/'">Back to main</button>
         </div>
     </body>

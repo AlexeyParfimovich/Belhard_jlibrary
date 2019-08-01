@@ -15,12 +15,13 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class PrintServiceImpl implements PrintService {
-    private static Logger log = Logger.getLogger(PrintDAOImpl.class.getName());
+    private static Logger log = Logger.getLogger(PrintServiceImpl.class.getName());
 
     private PrintDAO printDAO;
 
@@ -29,17 +30,17 @@ public class PrintServiceImpl implements PrintService {
     }
 
     @Override
-    public Print findPrintById(Long id) {
+    public Print findPrintById(Long id) throws SQLException {
         return printDAO.getPrintById(id);
     }
 
     @Override
-    public Print findPrintByName(String name) {
+    public Print findPrintByName(String name) throws SQLException {
         return printDAO.getPrintByName(name);
     }
 
     @Override
-    public List<Print> findAllPrints() {
+    public List<Print> findAllPrints() throws SQLException {
         return printDAO.getAllPrints();
     }
 
@@ -100,17 +101,17 @@ public class PrintServiceImpl implements PrintService {
     }
 
     @Override
-    public void addPrint(Print print) {
+    public void addPrint(Print print) throws SQLException {
         printDAO.addPrint(print);
     }
 
     @Override
-    public void updatePrint(Print print) {
+    public void updatePrint(Print print) throws SQLException {
         printDAO.updatePrint(print);
     }
 
     @Override
-    public void deletePrint(Print print) {
+    public void deletePrint(Print print) throws SQLException {
         printDAO.deletePrint(print);
     }
 }

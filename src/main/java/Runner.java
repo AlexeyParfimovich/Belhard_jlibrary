@@ -16,15 +16,21 @@ public class Runner {
 
         //UserService us = new UserServiceImpl();
 
-        Collection<Print> prints = ps.findAllPrints();
+        try{
+            Collection<Print> prints = ps.findAllPrints();
+
+            if(prints != null){
+                for(Print print: prints) {
+                    System.out.println(print);
+                }
+            }
+
+        } catch(SQLException ex){
+            System.out.println("Query error");
+        }
 
         //ps.importToPrintsFromXML("Prints.xsd.xml");
 
-        if(prints != null){
-            for(Print print: prints) {
-                System.out.println(print);
-            }
-        }
     }
 
 }

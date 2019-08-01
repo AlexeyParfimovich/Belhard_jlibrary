@@ -10,7 +10,7 @@
             <h1>Books service app</h1>
         </div>
 
-        <div class="w3-container w3-padding">
+        <div>
             <%
                 if (request.getAttribute("Book") != null) {
                     out.println("<div class=\"w3-panel w3-green w3-display-container w3-card-4 w3-round\">\n" +
@@ -18,23 +18,42 @@
                 }
             %>
             <div class="w3-card-4">
-                <div class="w3-container w3-center w3-green>
+                <div class="w3-container w3-light-blue">
                     <h2>Add book</h2>
                 </div>
 
-                <form method="post" class="w3-selection w3-light-grey w3-padding">
+                <form method="post" method="post" class="w3-selection w3-light-grey w3-padding">
                     <label>Title:
-                        <input type="text" name="title" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"><br />
+                        <input type="text" name="title" class="w3-input w3-border w3-round-large"><br />
+                    </label>
+                    <label>Writer:
+                        <input type="text" name="writer" class="w3-input w3-border w3-round-large"><br />
                     </label>
                     <label>Genre:
-                        <input type="text" name="genre" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"><br />
+                        <select name="genre" class="w3-select w3-border w3-round-large">
+                            <option>--выберите жанр--</option>
+                            <option>CLASSIC</option>
+                            <option>CRIME</option>
+                            <option>FANTASY</option>
+                            <option>HISTORICAL</option>
+                            <option>HORROR</option>
+                            <option>THRILLER</option>
+                            <option>WESTERN</option>
+                        </select><br />
+                    </label><br />
+                    <label>ISBN:
+                        <input type="text" name="isbn" class="w3-input w3-border w3-round-large"><br />
+                    </label>
+                    <label>Publication date:
+                        <input type="date" name="date" class="w3-input w3-border w3-round-large"><br />
                     </label>
                     <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Add book</button>
+                    <button type="reset" class="w3-btn w3-green w3-round-large w3-margin-bottom">Reset data</button>
                 </form>
             </div>
         </div>
 
-        <div class="w3-container w3-grey w3-opacity w3-right-align w3-padding>
+        <div>
             <button class="w3-btn w3-round-large" onclick="location.href='/jlibrary/'">Back to main</button>
         </div>
     </body>

@@ -1,5 +1,6 @@
 package entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -65,7 +66,7 @@ public abstract class Print {
     @Override
     public String toString() {
         return "N_" + id +
-               ", '" + date + '\'' +
+               ", '" + new SimpleDateFormat("yyyy-MM-dd").format(date) + '\'' +
                ", '" + title + '\'';
     }
 

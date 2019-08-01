@@ -6,11 +6,6 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <servlet>
-    <servlet-name>HelloServlet</servlet-name>
-    <servlet-class>servlets.HelloServlet</servlet-class>
-  </servlet>
-
-  <servlet>
     <servlet-name>AddBookServlet</servlet-name>
     <servlet-class>servlets.AddBookServlet</servlet-class>
   </servlet>
@@ -19,11 +14,6 @@
     <servlet-name>BookListServlet</servlet-name>
     <servlet-class>servlets.BookListServlet</servlet-class>
   </servlet>
-
-  <servlet-mapping>
-    <servlet-name>HelloServlet</servlet-name>
-    <url-pattern>/Hello</url-pattern>
-  </servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>AddBookServlet</servlet-name>
